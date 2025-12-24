@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { ArrowRight, BarChart3, Check, Layers, Smartphone } from "lucide-react";
 
 export function Hero() {
@@ -38,12 +39,16 @@ export function Hero() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20">
-                Book a quick systems audit
-              </Button>
-              <Button variant="outline" size="lg" className="bg-white/50 backdrop-blur-sm border-slate-200 hover:bg-white">
-                See use cases <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
+              <Link href="/contact">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20">
+                  Book a quick systems audit
+                </Button>
+              </Link>
+              <Link href="/use-cases">
+                <Button variant="outline" size="lg" className="bg-white/50 backdrop-blur-sm border-slate-200 hover:bg-white">
+                  See use cases <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
             </div>
           </motion.div>
 

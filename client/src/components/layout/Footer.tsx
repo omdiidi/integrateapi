@@ -6,8 +6,10 @@ export function Footer() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-1">
-            <Link href="/" className="text-xl font-bold font-heading tracking-tight text-primary mb-4 block">
-              IntegrateAPI
+            <Link href="/">
+              <a className="text-xl font-bold font-heading tracking-tight text-primary mb-4 block">
+                IntegrateAPI
+              </a>
             </Link>
             <p className="text-slate-500 text-sm leading-relaxed mb-6">
               Modernizing operations for forward-thinking businesses. We connect your tools so you can focus on growth.
@@ -20,18 +22,18 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-primary mb-4">Company</h4>
             <ul className="space-y-2 text-sm text-slate-500">
-              <li><a href="#" className="hover:text-accent transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Contact</a></li>
+              <li><Link href="/about"><a className="hover:text-accent transition-colors">About</a></Link></li>
+              <li><Link href="/about"><a className="hover:text-accent transition-colors">Careers</a></Link></li>
+              <li><Link href="/contact"><a className="hover:text-accent transition-colors">Contact</a></Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold text-primary mb-4">Services</h4>
             <ul className="space-y-2 text-sm text-slate-500">
-              <li><a href="#" className="hover:text-accent transition-colors">Workflow Automation</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">System Integration</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Data Dashboards</a></li>
+              <li><Link href="/services"><a className="hover:text-accent transition-colors">Workflow Automation</a></Link></li>
+              <li><Link href="/services"><a className="hover:text-accent transition-colors">System Integration</a></Link></li>
+              <li><Link href="/services"><a className="hover:text-accent transition-colors">Data Dashboards</a></Link></li>
             </ul>
           </div>
 

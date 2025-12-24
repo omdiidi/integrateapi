@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 export function FinalCTA() {
   return (
@@ -12,12 +13,16 @@ export function FinalCTA() {
             Let's build the systems your business deserves.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="h-14 px-10 text-lg bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20">
-              Book a quick systems audit
-            </Button>
-            <Button variant="outline" size="lg" className="h-14 px-10 text-lg border-slate-200 hover:bg-slate-50">
-              Email us directly
-            </Button>
+            <Link href="/contact">
+              <Button size="lg" className="h-14 px-10 text-lg bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20">
+                Book a quick systems audit
+              </Button>
+            </Link>
+            <a href="mailto:hello@integrateapi.com">
+              <Button variant="outline" size="lg" className="h-14 px-10 text-lg border-slate-200 hover:bg-slate-50">
+                Email us directly
+              </Button>
+            </a>
           </div>
         </div>
       </div>

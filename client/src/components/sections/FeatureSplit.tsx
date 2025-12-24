@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { ArrowRight, CheckCircle2, FileText, Settings, Database } from "lucide-react";
 
 interface FeatureProps {
@@ -82,9 +83,11 @@ function FeatureSection({ title, description, label, icon, points, align, index 
               ))}
             </ul>
             
-            <Button variant="outline" className="rounded-full border-slate-200 text-slate-700 hover:text-primary hover:border-primary">
-              See how it works <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
+            <Link href="/how-it-works">
+              <Button variant="outline" className="rounded-full border-slate-200 text-slate-700 hover:text-primary hover:border-primary">
+                See how it works <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
           </div>
 
           {/* Graphic Content - Abstract UI */}

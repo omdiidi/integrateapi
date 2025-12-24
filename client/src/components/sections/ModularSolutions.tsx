@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { ArrowRight, Box, Zap, Share2, Layers, Cpu, Cloud } from "lucide-react";
 
 export function ModularSolutions() {
@@ -21,12 +22,14 @@ export function ModularSolutions() {
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
               We don't replace your favorite tools—we make them talk to each other. Connect POS, scheduling, CRM, and accounting into a single source of truth.
             </p>
-            <Button className="rounded-full pl-6 pr-4 py-6 text-base bg-white text-primary border border-slate-200 hover:border-primary hover:bg-slate-50 shadow-sm transition-all group">
-              Explore integrations 
-              <span className="ml-2 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                <ArrowRight size={16} />
-              </span>
-            </Button>
+            <Link href="/services">
+              <Button className="rounded-full pl-6 pr-4 py-6 text-base bg-white text-primary border border-slate-200 hover:border-primary hover:bg-slate-50 shadow-sm transition-all group">
+                Explore integrations 
+                <span className="ml-2 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <ArrowRight size={16} />
+                </span>
+              </Button>
+            </Link>
           </div>
 
           {/* Right Network Visualization */}
