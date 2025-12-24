@@ -3,12 +3,18 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, Workflow, Database, Cable } from "lucide-react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 
 export default function Services() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <main className="pt-24">
+      <motion.main 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="pt-24"
+      >
         {/* Header */}
         <section className="py-20 bg-slate-50 border-b border-slate-100">
           <div className="container mx-auto px-4 md:px-6 text-center max-w-3xl">
@@ -183,7 +189,7 @@ export default function Services() {
              </Link>
           </div>
         </section>
-      </main>
+      </motion.main>
       <Footer />
     </div>
   );

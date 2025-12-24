@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { CheckCircle2 } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -54,7 +55,12 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <main className="pt-24">
+      <motion.main 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="pt-24"
+      >
         <section className="py-20 bg-slate-50 border-b border-slate-100">
            <div className="container mx-auto px-4 text-center">
              <h1 className="text-4xl font-bold font-heading text-primary mb-4">Contact Us</h1>
@@ -151,7 +157,7 @@ export default function Contact() {
             )}
           </div>
         </section>
-      </main>
+      </motion.main>
       <Footer />
     </div>
   );

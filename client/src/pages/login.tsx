@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link, useLocation } from "wouter";
 import { ArrowLeft } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Login() {
   const [, setLocation] = useLocation();
@@ -15,8 +16,18 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="min-h-screen bg-slate-50 flex items-center justify-center p-4"
+    >
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+        className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden"
+      >
         <div className="p-8">
            <Link href="/">
              <a className="inline-flex items-center text-sm text-slate-500 hover:text-primary mb-8 transition-colors">
@@ -42,7 +53,7 @@ export default function Login() {
         <div className="bg-slate-50 p-6 text-center text-sm text-slate-500 border-t border-slate-100">
            Don't have an account? <Link href="/contact"><a className="text-accent hover:underline">Contact us</a></Link>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

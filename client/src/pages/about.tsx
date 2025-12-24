@@ -2,12 +2,18 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 
 export default function About() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <main className="pt-24">
+      <motion.main 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="pt-24"
+      >
         <section className="py-20">
           <div className="container mx-auto px-4 md:px-6 max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold font-heading text-primary mb-8">
@@ -39,7 +45,7 @@ export default function About() {
             </div>
           </div>
         </section>
-      </main>
+      </motion.main>
       <Footer />
     </div>
   );

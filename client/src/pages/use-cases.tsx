@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Stethoscope, Truck, ShoppingBag, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function UseCases() {
   const cases = [
@@ -35,7 +36,12 @@ export default function UseCases() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <main className="pt-24">
+      <motion.main 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="pt-24"
+      >
         <section className="py-20 bg-slate-50 border-b border-slate-100">
           <div className="container mx-auto px-4 md:px-6 text-center max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold font-heading text-primary mb-6">
@@ -84,7 +90,7 @@ export default function UseCases() {
              <Button size="lg">Let's fix them <ArrowRight className="ml-2 w-4 h-4" /></Button>
            </Link>
         </section>
-      </main>
+      </motion.main>
       <Footer />
     </div>
   );
