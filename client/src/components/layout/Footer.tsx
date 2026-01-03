@@ -23,7 +23,6 @@ export function Footer() {
             <h4 className="font-semibold text-primary mb-4">Company</h4>
             <ul className="space-y-2 text-sm text-slate-500">
               <li><Link href="/about"><a className="hover:text-accent transition-colors">About</a></Link></li>
-              <li><Link href="/about"><a className="hover:text-accent transition-colors">Careers</a></Link></li>
               <li><Link href="/contact"><a className="hover:text-accent transition-colors">Contact</a></Link></li>
             </ul>
           </div>
@@ -45,13 +44,17 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        
+
         <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
           <div className="flex gap-6">
             <a href="#" className="hover:text-slate-600">Privacy Policy</a>
             <a href="#" className="hover:text-slate-600">Terms of Service</a>
           </div>
-          <p>Made with calm precision.</p>
+          <div className="flex items-center gap-6">
+            <p>Made with calm precision.</p>
+            <Link href="/login"><a className="text-slate-300 hover:text-slate-400 transition-colors">Log in</a></Link>
+            <Link href="/demo"><a className="text-slate-300 hover:text-slate-400 transition-colors">Demo</a></Link>
+          </div>
         </div>
       </div>
     </footer>

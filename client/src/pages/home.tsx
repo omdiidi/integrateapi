@@ -7,12 +7,17 @@ import { FeatureSplit } from "@/components/sections/FeatureSplit";
 import { ScaleSection } from "@/components/sections/ScaleSection";
 import { CardCarousel } from "@/components/sections/CardCarousel";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <main>
+      <main className="scroll-smooth snap-y snap-proximity">
         <Hero />
         <LogoWall />
         <ModularSolutions />

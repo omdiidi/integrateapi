@@ -11,6 +11,7 @@ import UseCases from "@/pages/use-cases";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Login from "@/pages/login";
+import Demo from "@/pages/demo";
 
 function Router() {
   return (
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/login" component={Login} />
+      <Route path="/demo" component={Demo} />
       <Route component={NotFound} />
     </Switch>
   );

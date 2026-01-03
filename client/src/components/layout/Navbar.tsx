@@ -28,8 +28,8 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
-        isScrolled ? "bg-white/80 backdrop-blur-md border-slate-200 py-3 shadow-sm" : "bg-transparent py-5"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled ? "bg-white/95 backdrop-blur-md py-3" : "bg-transparent py-5"
       )}
     >
       <div className="container mx-auto px-4 md:px-6">
@@ -43,7 +43,7 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-8">
               {navLinks.map((link) => (
                 <Link key={link.name} href={link.href}>
                   <a
@@ -57,18 +57,11 @@ export function Navbar() {
                 </Link>
               ))}
             </div>
-            <div className="flex items-center gap-4">
-              <Link href="/login">
-                <Button variant="ghost" size="sm" className="hidden lg:inline-flex">
-                  Log in
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button variant="default" size="sm" className="bg-primary hover:bg-primary/90">
-                  Book a systems audit
-                </Button>
-              </Link>
-            </div>
+            <Link href="/contact">
+              <Button variant="default" size="sm" className="bg-[#007AFF] text-white hover:bg-[#0062CC] shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
+                Book a systems audit
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -99,13 +92,8 @@ export function Navbar() {
               </Link>
             ))}
             <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-slate-100">
-              <Link href="/login">
-                <Button variant="outline" className="w-full justify-center">
-                  Log in
-                </Button>
-              </Link>
               <Link href="/contact">
-                <Button variant="default" className="w-full justify-center">
+                <Button variant="default" className="w-full justify-center bg-[#007AFF] text-white hover:bg-[#0062CC] shadow-md hover:shadow-lg transition-all duration-300">
                   Book a systems audit
                 </Button>
               </Link>

@@ -4,27 +4,24 @@ import { ArrowRight, Box, Zap, Share2, Layers, Cpu, Cloud } from "lucide-react";
 
 export function ModularSolutions() {
   return (
-    <section className="py-24 bg-slate-50 border-b border-slate-100 relative overflow-hidden">
+    <section className="py-12 bg-slate-50 border-b border-slate-100 relative overflow-hidden snap-start">
       {/* Background Grid */}
       <div className="absolute inset-0 grid-bg opacity-50 pointer-events-none" />
-      
+
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
+
           {/* Left Content */}
           <div>
-            <div className="text-accent font-semibold text-sm tracking-wide uppercase mb-4">
-              Connected Ecosystem
-            </div>
             <h2 className="text-3xl md:text-4xl font-bold font-heading text-primary mb-6">
-              Your tools should work as one team.
+              Your tools should work together, not get in your way.
             </h2>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              We don't replace your favorite tools—we make them talk to each other. Connect POS, scheduling, CRM, and accounting into a single source of truth.
+              We study how your business actually runs, then connect your existing tools of choice into a system that feels natural to use all built around for you. No forced platforms. No generic setups. Just clean, reliable workflows built around your operation.
             </p>
             <Link href="/services">
               <Button className="rounded-full pl-6 pr-4 py-6 text-base bg-white text-primary border border-slate-200 hover:border-primary hover:bg-slate-50 shadow-sm transition-all group">
-                Explore integrations 
+                Explore integrations
                 <span className="ml-2 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center group-hover:scale-110 transition-transform">
                   <ArrowRight size={16} />
                 </span>
@@ -51,11 +48,11 @@ export function ModularSolutions() {
                 { icon: <Cpu size={20} />, angle: 240, color: "bg-red-100 text-red-600" },
                 { icon: <Cloud size={20} />, angle: 300, color: "bg-cyan-100 text-cyan-600" },
               ].map((item, i) => (
-                <div 
+                <div
                   key={i}
                   className={`absolute top-1/2 left-1/2 w-12 h-12 -ml-6 -mt-6 rounded-xl shadow-md border border-white flex items-center justify-center ${item.color}`}
-                  style={{ 
-                    transform: `rotate(${item.angle}deg) translate(140px) rotate(-${item.angle}deg)` 
+                  style={{
+                    transform: `rotate(${item.angle}deg) translate(140px) rotate(-${item.angle}deg)`
                   }}
                 >
                   {item.icon}

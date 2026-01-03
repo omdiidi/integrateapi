@@ -15,9 +15,28 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { CheckCircle2 } from "lucide-react";
-import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { CheckCircle2, Mail, MessageSquare, Phone, Copy, X, User } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
+
+// Contact data - hidden from main page, only shown in modal
+const CONTACTS = [
+  {
+    id: "omid",
+    name: "Omid Zahrai",
+    email: "zomid717@gmail.com",
+    phone: "4254421742",
+    phoneFormatted: "(425) 442-1742",
+  },
+  {
+    id: "nicholas",
+    name: "Nicholas Pardon",
+    email: "nkpardon8@gmail.com",
+    phone: "4252293497",
+    phoneFormatted: "(425) 229-3497",
+  },
+];
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -26,9 +45,179 @@ const formSchema = z.object({
   message: z.string().min(10, "Please provide a bit more detail"),
 });
 
+// Contact Modal Component
+interface ContactModalProps {
+  person: typeof CONTACTS[0] | null;
+  open: boolean;
+  onClose: () => void;
+}
+
+function ContactModal({ person, open, onClose }: ContactModalProps) {
+  const { toast } = useToast();
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mediaQuery.matches);
+  }, []);
+
+  const copyToClipboard = useCallback((text: string, type: string) => {
+    navigator.clipboard.writeText(text);
+    toast({
+      title: "Copied!",
+      description: `${type} copied to clipboard.`,
+    });
+  }, [toast]);
+
+  if (!person) return null;
+
+  return (
+    <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
+      <DialogContent
+        hideCloseButton
+        className="max-w-sm p-0 gap-0 overflow-hidden border-0 shadow-2xl bg-white"
+        style={{
+          animation: reducedMotion ? "none" : undefined,
+        }}
+      >
+        {/* Header */}
+        <div className="relative bg-gradient-to-r from-[#007AFF] to-[#5856D6] p-6">
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 hover:scale-110"
+            aria-label="Close"
+          >
+            <X className="h-4 w-4 text-white" />
+          </button>
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center">
+              <User className="w-7 h-7 text-white" />
+            </div>
+            <div>
+              <DialogHeader className="p-0">
+                <DialogTitle className="text-xl font-bold text-white">
+                  Contact {person.name.split(" ")[0]}
+                </DialogTitle>
+              </DialogHeader>
+              <p className="text-white/80 text-sm">{person.name}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-6 space-y-4">
+          {/* Email */}
+          <div className="space-y-2">
+            <label className="text-xs font-medium text-slate-500 uppercase tracking-wide">Email</label>
+            <div className="flex items-center gap-2">
+              <div className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-700 font-mono">
+                {person.email}
+              </div>
+              <button
+                onClick={() => copyToClipboard(person.email, "Email")}
+                className="p-3 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+                aria-label="Copy email"
+              >
+                <Copy className="w-4 h-4 text-slate-600" />
+              </button>
+            </div>
+            <a
+              href={`mailto:${person.email}`}
+              className="flex items-center justify-center gap-2 w-full py-3 bg-[#007AFF] hover:bg-[#0062CC] text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg"
+            >
+              <Mail className="w-4 h-4" />
+              Send Email
+            </a>
+          </div>
+
+          {/* Phone */}
+          <div className="space-y-2">
+            <label className="text-xs font-medium text-slate-500 uppercase tracking-wide">Phone</label>
+            <div className="flex items-center gap-2">
+              <div className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-700 font-mono">
+                {person.phoneFormatted}
+              </div>
+              <button
+                onClick={() => copyToClipboard(person.phone, "Phone number")}
+                className="p-3 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+                aria-label="Copy phone number"
+              >
+                <Copy className="w-4 h-4 text-slate-600" />
+              </button>
+            </div>
+            <div className="flex gap-2">
+              <a
+                href={`sms:${person.phone}`}
+                className="flex-1 flex items-center justify-center gap-2 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg"
+              >
+                <MessageSquare className="w-4 h-4" />
+                Text
+              </a>
+              <a
+                href={`tel:${person.phone}`}
+                className="flex-1 flex items-center justify-center gap-2 py-3 bg-violet-500 hover:bg-violet-600 text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg"
+              >
+                <Phone className="w-4 h-4" />
+                Call
+              </a>
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+// Person Card Component
+interface PersonCardProps {
+  person: typeof CONTACTS[0];
+  onContact: (person: typeof CONTACTS[0]) => void;
+}
+
+function PersonCard({ person, onContact }: PersonCardProps) {
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+      <div className="flex items-center gap-4 mb-5">
+        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#007AFF] to-[#5856D6] flex items-center justify-center">
+          <User className="w-6 h-6 text-white" />
+        </div>
+        <div>
+          <h3 className="font-semibold text-slate-800">{person.name}</h3>
+          <p className="text-sm text-slate-500">Co-founder</p>
+        </div>
+      </div>
+      <div className="flex gap-2">
+        <button
+          onClick={() => onContact(person)}
+          className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[#007AFF] hover:bg-[#0062CC] text-white text-sm font-medium rounded-lg transition-all duration-300 hover:shadow-md"
+        >
+          <Mail className="w-4 h-4" />
+          Email
+        </button>
+        <button
+          onClick={() => onContact(person)}
+          className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium rounded-lg transition-all duration-300 hover:shadow-md"
+        >
+          <MessageSquare className="w-4 h-4" />
+          Text
+        </button>
+        <button
+          onClick={() => onContact(person)}
+          className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-violet-500 hover:bg-violet-600 text-white text-sm font-medium rounded-lg transition-all duration-300 hover:shadow-md"
+        >
+          <Phone className="w-4 h-4" />
+          Call
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function Contact() {
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [selectedPerson, setSelectedPerson] = useState<typeof CONTACTS[0] | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,8 +229,11 @@ export default function Contact() {
     },
   });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Mock API call
     console.log(values);
     setTimeout(() => {
       setIsSubmitted(true);
@@ -52,24 +244,51 @@ export default function Contact() {
     }, 1000);
   }
 
+  const handleContactClick = useCallback((person: typeof CONTACTS[0]) => {
+    setSelectedPerson(person);
+    setModalOpen(true);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <motion.main 
+      <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="pt-24"
+        className="pt-20"
       >
-        <section className="py-20 bg-slate-50 border-b border-slate-100">
-           <div className="container mx-auto px-4 text-center">
-             <h1 className="text-4xl font-bold font-heading text-primary mb-4">Contact Us</h1>
-             <p className="text-slate-600">Let's discuss your operational challenges.</p>
-           </div>
+        <section className="py-10 bg-slate-50">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl font-bold font-heading text-primary mb-4">Contact Us</h1>
+            <p className="text-slate-600">Let's discuss your operational challenges.</p>
+          </div>
         </section>
 
-        <section className="py-24">
+        {/* Contact Us Directly Section */}
+        <section className="py-12 border-b border-slate-100">
           <div className="container mx-auto px-4 max-w-2xl">
+            <h2 className="text-2xl font-bold font-heading text-primary text-center mb-8">
+              Contact us directly
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {CONTACTS.map((person) => (
+                <PersonCard
+                  key={person.id}
+                  person={person}
+                  onContact={handleContactClick}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Existing Form Section */}
+        <section className="py-12">
+          <div className="container mx-auto px-4 max-w-2xl">
+            <h2 className="text-xl font-semibold text-slate-700 text-center mb-8">
+              Or send us a message
+            </h2>
             {isSubmitted ? (
               <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-12 text-center animate-in fade-in zoom-in duration-500">
                 <div className="h-20 w-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -115,7 +334,7 @@ export default function Contact() {
                         )}
                       />
                     </div>
-                    
+
                     <FormField
                       control={form.control}
                       name="company"
@@ -129,7 +348,7 @@ export default function Contact() {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="message"
@@ -137,10 +356,10 @@ export default function Contact() {
                         <FormItem>
                           <Label>How can we help?</Label>
                           <FormControl>
-                            <Textarea 
-                              placeholder="Tell us about your current workflow bottlenecks..." 
-                              className="min-h-[120px]" 
-                              {...field} 
+                            <Textarea
+                              placeholder="Tell us about your current workflow bottlenecks..."
+                              className="min-h-[120px]"
+                              {...field}
                             />
                           </FormControl>
                           <FormMessage />
@@ -148,7 +367,7 @@ export default function Contact() {
                       )}
                     />
 
-                    <Button type="submit" size="lg" className="w-full">
+                    <Button type="submit" size="lg" className="w-full bg-[#007AFF] text-white hover:bg-[#0062CC] shadow-lg hover:shadow-xl transition-all duration-300">
                       Book Systems Audit
                     </Button>
                   </form>
@@ -159,6 +378,13 @@ export default function Contact() {
         </section>
       </motion.main>
       <Footer />
+
+      {/* Contact Modal */}
+      <ContactModal
+        person={selectedPerson}
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+      />
     </div>
   );
 }
