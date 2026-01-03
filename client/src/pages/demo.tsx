@@ -22,17 +22,38 @@ function getSourceMessage(src: string | null): string {
 
 export default function Demo() {
     const [sourceMessage, setSourceMessage] = useState("");
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
+        setIsClient(true);
         window.scrollTo(0, 0);
-        const params = new URLSearchParams(window.location.search);
-        const src = params.get("src");
-        setSourceMessage(getSourceMessage(src));
+
+        if (typeof window !== "undefined") {
+            const params = new URLSearchParams(window.location.search);
+            const src = params.get("src");
+            setSourceMessage(getSourceMessage(src));
+        }
     }, []);
 
     const handleViewDemo = () => {
         window.open(DEMO_URL, "_blank", "noopener,noreferrer");
     };
+
+    // Ensure content renders on both server and client
+    if (!isClient) {
+        return (
+            <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex flex-col">
+                <Navbar />
+                <main className="flex-1 flex items-center justify-center px-4 pt-24 pb-12">
+                    <div className="w-full max-w-lg animate-pulse">
+                        <div className="bg-slate-200 rounded-2xl h-32 mb-6" />
+                        <div className="bg-slate-100 rounded-2xl h-96" />
+                    </div>
+                </main>
+                <Footer />
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex flex-col">
