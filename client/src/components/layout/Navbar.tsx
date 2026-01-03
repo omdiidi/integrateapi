@@ -22,7 +22,6 @@ export function Navbar() {
     { name: "How It Works", href: "/how-it-works" },
     { name: "Use Cases", href: "/use-cases" },
     { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -59,7 +58,7 @@ export function Navbar() {
             </div>
             <Link href="/contact">
               <Button variant="default" size="sm" className="bg-[#007AFF] text-white hover:bg-[#0062CC] shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
-                Book a systems audit
+                Contact us directly
               </Button>
             </Link>
           </div>
@@ -94,7 +93,7 @@ export function Navbar() {
             <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-slate-100">
               <Link href="/contact">
                 <Button variant="default" className="w-full justify-center bg-[#007AFF] text-white hover:bg-[#0062CC] shadow-md hover:shadow-lg transition-all duration-300">
-                  Book a systems audit
+                  Contact us directly
                 </Button>
               </Link>
             </div>

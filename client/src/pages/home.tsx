@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { LogoWall } from "@/components/sections/LogoWall";
 import { ModularSolutions } from "@/components/sections/ModularSolutions";
 import { FeatureSplit } from "@/components/sections/FeatureSplit";
 import { ScaleSection } from "@/components/sections/ScaleSection";
@@ -19,7 +18,6 @@ export default function Home() {
       <Navbar />
       <main className="scroll-smooth snap-y snap-proximity">
         <Hero />
-        <LogoWall />
         <ModularSolutions />
         <FeatureSplit />
         <ScaleSection />

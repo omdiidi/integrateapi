@@ -91,7 +91,7 @@ export function Hero() {
               <Link href="/contact">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button size="lg" className="bg-[#007AFF] text-white hover:bg-[#0062CC] shadow-lg hover:shadow-xl transition-all duration-300">
-                    Book a quick systems audit
+                    Contact us directly
                   </Button>
                 </motion.div>
               </Link>

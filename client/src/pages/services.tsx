@@ -162,7 +162,7 @@ export default function Services() {
             <h2 className="text-3xl font-bold font-heading mb-6">Ready to modernize?</h2>
             <Link href="/contact">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button size="lg" className="bg-[#007AFF] text-white hover:bg-[#0062CC] shadow-lg hover:shadow-xl transition-all duration-300">Book a systems audit</Button>
+                <Button size="lg" className="bg-[#007AFF] text-white hover:bg-[#0062CC] shadow-lg hover:shadow-xl transition-all duration-300">Contact us directly</Button>
               </motion.div>
             </Link>
           </div>

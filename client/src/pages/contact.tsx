@@ -28,6 +28,7 @@ const CONTACTS = [
     email: "zomid717@gmail.com",
     phone: "4254421742",
     phoneFormatted: "(425) 442-1742",
+    avatar: "/omid.png",
   },
   {
     id: "nicholas",
@@ -35,6 +36,7 @@ const CONTACTS = [
     email: "nkpardon8@gmail.com",
     phone: "4252293497",
     phoneFormatted: "(425) 229-3497",
+    avatar: "/nicholas.png",
   },
 ];
 
@@ -172,15 +174,26 @@ function ContactModal({ person, open, onClose }: ContactModalProps) {
 interface PersonCardProps {
   person: typeof CONTACTS[0];
   onContact: (person: typeof CONTACTS[0]) => void;
+  onEmail: () => void;
 }
 
-function PersonCard({ person, onContact }: PersonCardProps) {
+function PersonCard({ person, onContact, onEmail }: PersonCardProps) {
   return (
     <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
-      <div className="flex items-center gap-4 mb-5">
-        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#007AFF] to-[#5856D6] flex items-center justify-center">
-          <User className="w-6 h-6 text-white" />
-        </div>
+      <div className="flex items-center gap-5 mb-6">
+        {person.avatar ? (
+          <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-slate-100 shadow-sm shrink-0">
+            <img
+              src={person.avatar}
+              alt={person.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ) : (
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#007AFF] to-[#5856D6] flex items-center justify-center border-2 border-white shadow-sm shrink-0">
+            <User className="w-8 h-8 text-white" />
+          </div>
+        )}
         <div>
           <h3 className="font-semibold text-slate-800">{person.name}</h3>
           <p className="text-sm text-slate-500">Co-founder</p>
@@ -188,7 +201,7 @@ function PersonCard({ person, onContact }: PersonCardProps) {
       </div>
       <div className="flex gap-2">
         <button
-          onClick={() => onContact(person)}
+          onClick={onEmail}
           className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[#007AFF] hover:bg-[#0062CC] text-white text-sm font-medium rounded-lg transition-all duration-300 hover:shadow-md"
         >
           <Mail className="w-4 h-4" />
@@ -237,6 +250,7 @@ export default function Contact() {
     console.log(values);
     setTimeout(() => {
       setIsSubmitted(true);
+      scrollToForm(); // Scroll back to top of form area? or just show success
       toast({
         title: "Message received",
         description: "We'll get back to you within 24 hours.",
@@ -247,6 +261,13 @@ export default function Contact() {
   const handleContactClick = useCallback((person: typeof CONTACTS[0]) => {
     setSelectedPerson(person);
     setModalOpen(true);
+  }, []);
+
+  const scrollToForm = useCallback(() => {
+    const el = document.getElementById("contact-form");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
   }, []);
 
   return (
@@ -277,6 +298,7 @@ export default function Contact() {
                   key={person.id}
                   person={person}
                   onContact={handleContactClick}
+                  onEmail={scrollToForm}
                 />
               ))}
             </div>
@@ -284,7 +306,7 @@ export default function Contact() {
         </section>
 
         {/* Existing Form Section */}
-        <section className="py-12">
+        <section id="contact-form" className="py-12">
           <div className="container mx-auto px-4 max-w-2xl">
             <h2 className="text-xl font-semibold text-slate-700 text-center mb-8">
               Or send us a message
@@ -368,7 +390,7 @@ export default function Contact() {
                     />
 
                     <Button type="submit" size="lg" className="w-full bg-[#007AFF] text-white hover:bg-[#0062CC] shadow-lg hover:shadow-xl transition-all duration-300">
-                      Book Systems Audit
+                      Send Message
                     </Button>
                   </form>
                 </Form>

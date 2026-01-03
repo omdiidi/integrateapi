@@ -39,7 +39,7 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-primary mb-4">Contact</h4>
             <ul className="space-y-2 text-sm text-slate-500">
-              <li>hello@integrateapi.com</li>
+              <li><Link href="/contact"><a className="hover:text-accent transition-colors">Get in touch</a></Link></li>
               <li>Serving clients worldwide</li>
             </ul>
           </div>
