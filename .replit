@@ -14,9 +14,12 @@ PORT = "5000"
 NODE_ENV = "production"
 
 [deployment]
-# Use autoscale for proper Node.js server deployment with SPA routing
+# Autoscale deployment runs the Node.js server with SPA routing
 deploymentTarget = "autoscale"
+# Build then start production server
 run = ["sh", "-c", "npm run build && npm run start"]
+# Ignore files not needed for deployment
+ignoredPaths = [".config", ".git", "node_modules", "client/src"]
 
 [workflows]
 runButton = "Project"
